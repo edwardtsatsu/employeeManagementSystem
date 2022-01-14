@@ -1,6 +1,6 @@
 package com.turntabl.employeemanager.service;
 
-import com.turntabl.employeemanager.exception.UserNotFounddException;
+import com.turntabl.employeemanager.exception.UserNotFoundException;
 import com.turntabl.employeemanager.model.Employee;
 import com.turntabl.employeemanager.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public List<Employee>  findAllEmployee(){
+    public List<Employee> findAllEmployee(){
         return employeeRepository.findAll();
     }
 
@@ -35,7 +35,7 @@ public class EmployeeService {
 
     public Employee findEmployeeById(Long id){
        return  employeeRepository.findEmployeeById(id)
-               .orElseThrow(()-> new UserNotFounddException("User by " + id + "is not found"));
+               .orElseThrow(()-> new UserNotFoundException("User by " + id + "is not found"));
     }
 
 }
