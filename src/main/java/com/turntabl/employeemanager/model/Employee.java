@@ -11,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +24,6 @@ public class Employee implements Serializable {
     private String imageUrl;
     @Column(nullable = false, updatable = false)
     private String employeeCode;
+
 
 }

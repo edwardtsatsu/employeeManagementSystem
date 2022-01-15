@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turntabl.employeemanager.controller.EmployeeController;
 import com.turntabl.employeemanager.dto.EmployeeDto;
 import com.turntabl.employeemanager.model.Employee;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
@@ -16,7 +17,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
+import java.util.regex.Matcher;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 /**
@@ -32,8 +37,8 @@ public class EmployeeControllerTest {
 
     private MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+//    @Autowired
+//    private ObjectMapper objectMapper;
 
     @InjectMocks
     private EmployeeController employeeController;
@@ -52,17 +57,19 @@ public class EmployeeControllerTest {
      */
     @Test
     public void testGetAllEmployee() throws Exception {
-        EmployeeDto employeeDto = EmployeeDto.builder()
-                        .email("edwardakorlie73@gmail.com")
-                                .id(1L).jobTitle("software Engineer")
-                        .build();
-        List<EmployeeDto> employeeList = List.of(employeeDto);
+        Employee employee = Employee.builder()
+                .email("edwardakorlie73@gmail.com")
+                .jobTitle("software Engineer").name("edward")
+                .build();
+        List<Employee> expectedResponse = List.of(employee);
 
-        when(employeeController.getAllEmployee());
+//        when(employeeController.getAllEmployee()).thenReturn(expectedResponse);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/all"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().);
+                .andExpect(jsonPath("$.name", Matchers.is("latif")))
+                .andExpect(jsonPath("$.email",Matchers.is("latif@gmail.com")));
+
 
     }
 
