@@ -1,5 +1,7 @@
 package com.turntabl.employeemanager.service;
 
+import com.turntabl.employeemanager.converter.EmployeeToEmployeeDto;
+import com.turntabl.employeemanager.dto.EmployeeDto;
 import com.turntabl.employeemanager.exception.UserNotFoundException;
 import com.turntabl.employeemanager.model.Employee;
 import com.turntabl.employeemanager.repository.EmployeeRepository;
@@ -11,9 +13,11 @@ import java.util.UUID;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final EmployeeToEmployeeDto employeeToEmployeeDto;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, EmployeeToEmployeeDto employeeToEmployeeDto) {
         this.employeeRepository = employeeRepository;
+        this.employeeToEmployeeDto = employeeToEmployeeDto;
     }
 
     public Employee addEmployee(Employee employee){

@@ -1,16 +1,23 @@
 package test.com.turntabl.employeemanager.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.turntabl.employeemanager.controller.EmployeeController;
+import com.turntabl.employeemanager.dto.EmployeeDto;
+import com.turntabl.employeemanager.model.Employee;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import java.util.List;
+import static org.mockito.Mockito.when;
+
 
 /**
  * EmployeeController Tester.
@@ -24,6 +31,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class EmployeeControllerTest {
 
     private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @InjectMocks
     private EmployeeController employeeController;
@@ -42,7 +52,18 @@ public class EmployeeControllerTest {
      */
     @Test
     public void testGetAllEmployee() throws Exception {
-        //TODO: Test goes here...
+        EmployeeDto employeeDto = EmployeeDto.builder()
+                        .email("edwardakorlie73@gmail.com")
+                                .id(1L).jobTitle("software Engineer")
+                        .build();
+        List<EmployeeDto> employeeList = List.of(employeeDto);
+
+        when(employeeController.getAllEmployee());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/all"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().);
+
     }
 
     /**
@@ -78,4 +99,4 @@ public class EmployeeControllerTest {
     }
 
 
-} 
+}

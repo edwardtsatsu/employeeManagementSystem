@@ -1,5 +1,6 @@
 package com.turntabl.employeemanager.controller;
 
+import com.turntabl.employeemanager.dto.EmployeeDto;
 import com.turntabl.employeemanager.model.Employee;
 import com.turntabl.employeemanager.service.EmployeeService;
 import org.springframework.http.HttpStatus;
